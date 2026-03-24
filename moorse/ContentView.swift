@@ -8,6 +8,40 @@
 import SwiftUI
 import UIKit
 
+struct CustomButtonStyle: ButtonStyle{
+    func makeBody(configuration: Configuration)-> some View {
+        configuration.label
+            .font(Font.custom("LondrinaSolid-Regular", size: 26))
+            .font(.title)
+            .foregroundStyle(.colorBeige100)
+            .background(
+                Image("ButtonBG")
+                    .resizable()
+                    .scaledToFill()
+            )
+            .clipShape(Capsule())
+        
+            .shadow(color: configuration.isPressed ? Color.colorMaroonOrange200.opacity(0) : Color.colorMaroon400 , radius: 0, x: 0, y: 5)
+            .buttonStyle(.bordered)
+
+            .overlay(
+                Capsule()
+                    .stroke(configuration.isPressed ? Color.colorMaroon400 : Color.colorOrange200.opacity(0.25), lineWidth: 5)
+                    .blur(radius: 0)
+                    .offset(y: configuration.isPressed ? 3 : -2)
+                    .mask(Capsule())
+            )
+            .overlay(
+                Capsule()
+                    .stroke(configuration.isPressed ? Color.colorOrange200.opacity(0.25) : Color.colorMaroon400, lineWidth: configuration.isPressed ? 5 : 0)
+                    .blur(radius: 0)
+                    .offset(y: configuration.isPressed ? -2 : 3)
+                    .mask(Capsule())
+            )
+            .offset(y: configuration.isPressed ? 5 : 0)
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         VStack {
@@ -23,6 +57,7 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 30)
                 .padding(.top, -5)
+                .padding(.bottom, 150)
 
             Button(action: {
 
@@ -34,37 +69,25 @@ struct ContentView: View {
                         .resizable()
                         .frame(width: 16, height: 16)
                 }
-                .padding(.horizontal, 30)
-                .padding(.vertical, 5)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 10)
                 .shadow(radius: 0, x: 0, y: 5)
 
             }
+            .buttonStyle(CustomButtonStyle())
 
-            .font(Font.custom("LondrinaSolid-Regular", size: 26))
-            .font(.title)
-            .foregroundStyle(.colorBeige100)
-            //                .background(.colorMaroon300)
-            .background(
-                Image("ButtonBG")
-                    .resizable()
-                    .scaledToFill()
-            )
-            .clipShape(Capsule())
-            .shadow(color: .colorMaroon400, radius: 0, x: 0, y: 5)
-            .buttonStyle(.bordered)
-
-            .overlay(
-                Capsule()
-                    .stroke(Color.colorOrange200.opacity(0.25), lineWidth: 4)
-                    .blur(radius: 0)
-                    .offset(y: -2)
-                    .mask(Capsule())
-            )
+            
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.colorBeige100)
+        .background(
+            Image("BG")
+                .resizable()
+                .scaledToFill()
+            
+        )
         .ignoresSafeArea()
+        
     }
 
 }
