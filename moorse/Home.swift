@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct Line: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -59,13 +60,71 @@ struct Home: View {
                             Image(systemName: "star.fill")
                         }
                         Line()
-                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round,  dash: [20, 10]))
+                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round,  dash: [20, 15]))
                             .foregroundStyle(.colorBeige100)
                             .frame(height:1)
+                            .frame(minWidth:1)
+                        
+                        
+                        
+                        HStack {
+                            Button(action: {
+                                
+                            }) {
+                                HStack {
+                                    Text("Study")
+                                        .font(Font.custom("LondrinaSolid-Regular", size: 20))
+                                        .lineLimit(1)
+                                    Image(systemName: "xmark.triangle.circle.square.fill")
+                                        .resizable()
+                                        .frame(width: 16, height: 16)
+                                }
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 5)
+                                .contentShape(RoundedRectangle(cornerRadius: 12))
+                                .shadow(radius: 0, x: 0, y: 5)
+                            }
+                            .buttonStyle(CustomButtonStyle(cornerRadii: .init(
+                                topLeading: 30,
+                                bottomLeading: 30,
+                                bottomTrailing: 8,
+                                topTrailing: 8
+                            )))
+                            .compositingGroup()
+                            .allowsHitTesting(true)
+                            
+                            Button(action: {
+
+                            }) {
+                                HStack {
+                                    Text("Play")
+                                        .font(Font.custom("LondrinaSolid-Regular", size: 20))
+                                    Image(systemName: "play.fill")
+                                        .resizable()
+                                        .frame(width: 12, height: 12)
+                                }
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 5)
+                                .contentShape(RoundedRectangle(cornerRadius: 12))
+                                .shadow(radius: 0, x: 0, y: 5)
+                            }
+                            .buttonStyle(CustomButtonStyle(cornerRadii: .init(
+                                topLeading: 8,
+                                bottomLeading: 8,
+                                bottomTrailing: 30,
+                                topTrailing: 30
+                            )))
+                            .compositingGroup()
+                            .allowsHitTesting(true)
+                        }
+                        .padding(.vertical, 20)
+                        .background(Color.colorOrange300)
+                        
+                        
                         
                         
                     }
-                    .background(Color.colorOrange300)
+                    
                 }
             }
         }

@@ -8,35 +8,57 @@
 import SwiftUI
 import UIKit
 
-struct CustomButtonStyle: ButtonStyle{
-    func makeBody(configuration: Configuration)-> some View {
+struct CustomButtonStyle: ButtonStyle {
+    var cornerRadii: RectangleCornerRadii = .init(
+        topLeading: 30.0,
+        bottomLeading: 30.0,
+        bottomTrailing: 30.0,
+        topTrailing: 30.0
+    )
+
+    func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(Font.custom("LondrinaSolid-Regular", size: 26))
             .font(.title)
             .foregroundStyle(.colorBeige100)
             .background(
-                Image("ButtonBG")
-                    .resizable()
-                    .scaledToFill()
+                        Image("ButtonBG")
+                            .resizable()
+                            .scaledToFill()
+                    )
+                    .clipShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
+                    // ADD THIS LINE:
+                    .contentShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
+            .shadow(
+                color: configuration.isPressed
+                    ? Color.colorMaroonOrange200.opacity(0)
+                    : Color.colorMaroon400,
+                radius: 0,
+                x: 0,
+                y: 5
             )
-            .clipShape(Capsule())
-        
-            .shadow(color: configuration.isPressed ? Color.colorMaroonOrange200.opacity(0) : Color.colorMaroon400 , radius: 0, x: 0, y: 5)
-            .buttonStyle(.bordered)
-
             .overlay(
-                Capsule()
-                    .stroke(configuration.isPressed ? Color.colorMaroon400 : Color.colorOrange200.opacity(0.25), lineWidth: 5)
+                UnevenRoundedRectangle(cornerRadii: cornerRadii)
+                    .stroke(
+                        configuration.isPressed
+                            ? Color.colorMaroon400
+                            : Color.colorOrange200.opacity(0.25),
+                        lineWidth: 5
+                    )
                     .blur(radius: 0)
                     .offset(y: configuration.isPressed ? 3 : -2)
-                    .mask(Capsule())
+                    .mask(UnevenRoundedRectangle(cornerRadii: cornerRadii))
             )
             .overlay(
-                Capsule()
-                    .stroke(configuration.isPressed ? Color.colorOrange200.opacity(0.25) : Color.colorMaroon400, lineWidth: configuration.isPressed ? 5 : 0)
+                UnevenRoundedRectangle(cornerRadii: cornerRadii)
+                    .stroke(
+                        configuration.isPressed
+                            ? Color.colorOrange200.opacity(0.25)
+                            : Color.colorMaroon400,
+                        lineWidth: configuration.isPressed ? 5 : 0
+                    )
                     .blur(radius: 0)
                     .offset(y: configuration.isPressed ? -2 : 3)
-                    .mask(Capsule())
+                    .mask(UnevenRoundedRectangle(cornerRadii: cornerRadii))
             )
             .offset(y: configuration.isPressed ? 5 : 0)
     }
@@ -64,6 +86,7 @@ struct Menu: View {
             }) {
                 HStack {
                     Text("Get Started")
+                        .font(Font.custom("LondrinaSolid-Regular", size: 26))
                         .padding(.trailing, 5)
                     Image(systemName: "play.fill")
                         .resizable()
@@ -76,7 +99,6 @@ struct Menu: View {
             }
             .buttonStyle(CustomButtonStyle())
 
-            
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -84,9 +106,10 @@ struct Menu: View {
             Image("BG")
                 .resizable()
                 .scaledToFill()
-            
+
         )
-        .ignoresSafeArea()    }
+        .ignoresSafeArea()
+    }
 }
 
 #Preview {
