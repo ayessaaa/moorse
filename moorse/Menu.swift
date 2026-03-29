@@ -26,7 +26,6 @@ struct CustomButtonStyle: ButtonStyle {
                             .scaledToFill()
                     )
                     .clipShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
-                    // ADD THIS LINE:
                     .contentShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
             .shadow(
                 color: configuration.isPressed
