@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct Line: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -19,7 +18,7 @@ struct Line: Shape {
 
 struct Home: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 5) {
             HStack {
                 Text("Moorse")
                     .foregroundStyle(Color.colorMaroon300)
@@ -27,7 +26,7 @@ struct Home: View {
             .padding(10)
             .frame(maxWidth: .infinity)
             .background(
-                ZStack (alignment: .bottom) {
+                ZStack(alignment: .bottom) {
                     // Base fill
                     RoundedRectangle(cornerRadius: 0)
                         .fill(Color.colorBeige100)
@@ -37,15 +36,14 @@ struct Home: View {
                             x: 0,
                             y: 5
                         )
-                    
+
                     Spacer()
-                    
+
                     // Inner shadow
                     Rectangle()
                         .fill(Color.white.opacity(0.5))
                         .frame(maxWidth: .infinity, maxHeight: 5)
-                    
-                        
+
                 }
             )
             .background(Color.colorBeige100)
@@ -53,78 +51,203 @@ struct Home: View {
 
             ScrollView {
                 VStack {
-                    HStack {
-                        HStack{
-                            Image(systemName: "star.fill")
-                            Image(systemName: "star.fill")
-                            Image(systemName: "star.fill")
+                    HStack(spacing: 0) {
+                        VStack {
+                            ZStack(alignment: .bottom) {
+
+                                HStack (spacing: 10){
+                                    HStack {
+                                        Image(systemName: "star.fill")
+                                        Image(systemName: "star.fill")
+                                        Image(systemName: "star.fill")
+                                    }
+                                    .foregroundStyle(
+                                        Color.colorOrangeShadow.opacity(0.5)
+                                    )
+                                    Line()
+                                        .stroke(
+                                            style: StrokeStyle(
+                                                lineWidth: 10,
+                                                lineCap: .round,
+                                                dash: [15, 25]
+                                            )
+                                        )
+                                        .foregroundStyle(.colorBeige100.opacity(0.5))
+                                        .frame(height: 1)
+                                        .frame(minWidth: 1)
+                                }
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 5)
+                                .background(
+                                    Color.clear
+                                        .background(Color.colorOrange200)
+                                        .shadow(
+                                            color: Color.colorOrangeShadow,
+                                            radius: 0,
+                                            x: 0,
+                                            y: 5
+                                        )
+                                )
+
+                                .overlay(
+                                    UnevenRoundedRectangle(
+                                        cornerRadii: .init(
+                                            topLeading: 0,
+                                            bottomLeading: 0,
+                                            bottomTrailing: 0,
+                                            topTrailing: 0
+                                        )
+                                    )
+                                    .stroke(
+
+                                        Color.colorMaroon400,
+                                        lineWidth: 0
+                                    )
+                                    .blur(radius: 0)
+                                    .offset(y: 3)
+                                    .mask(
+                                        UnevenRoundedRectangle(
+                                            cornerRadii: .init(
+                                                topLeading: 0,
+                                                bottomLeading: 0,
+                                                bottomTrailing: 0,
+                                                topTrailing: 0
+                                            )
+                                        )
+                                    )
+                                )
+                                .offset(y: 0)
+
+                                Spacer()
+
+                                Rectangle()
+                                    .fill(Color.white.opacity(0.15))
+                                    .frame(maxWidth: .infinity, maxHeight: 5)
+                            }
+
+                            Spacer()
                         }
-                        Line()
-                            .stroke(style: StrokeStyle(lineWidth: 5, lineCap: .round,  dash: [20, 15]))
-                            .foregroundStyle(.colorBeige100)
-                            .frame(height:1)
-                            .frame(minWidth:1)
-                        
-                        
-                        
-                        HStack {
-                            Button(action: {
-                                
-                            }) {
-                                HStack {
-                                    Text("Study")
-                                        .font(Font.custom("LondrinaSolid-Regular", size: 20))
-                                        .lineLimit(1)
-                                    Image(systemName: "xmark.triangle.circle.square.fill")
+
+                        ZStack(alignment: .bottom) {
+
+                            HStack(spacing: 3) {
+                                Button(action: {
+
+                                }) {
+                                    HStack {
+                                        Text("Study")
+                                            .font(
+                                                Font.custom(
+                                                    "LondrinaSolid-Regular",
+                                                    size: 20
+                                                )
+                                            )
+                                            .lineLimit(1)
+                                        Image(
+                                            systemName:
+                                                "xmark.triangle.circle.square.fill"
+                                        )
                                         .resizable()
                                         .frame(width: 16, height: 16)
+                                    }
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 5)
+                                    .contentShape(
+                                        RoundedRectangle(cornerRadius: 12)
+                                    )
+                                    .shadow(radius: 0, x: 0, y: 5)
                                 }
-                                .padding(.horizontal, 15)
-                                .padding(.vertical, 5)
-                                .contentShape(RoundedRectangle(cornerRadius: 12))
-                                .shadow(radius: 0, x: 0, y: 5)
-                            }
-                            .buttonStyle(CustomButtonStyle(cornerRadii: .init(
-                                topLeading: 30,
-                                bottomLeading: 30,
-                                bottomTrailing: 8,
-                                topTrailing: 8
-                            )))
-                            .compositingGroup()
-                            .allowsHitTesting(true)
-                            
-                            Button(action: {
+                                .frame(minWidth: 100)
+                                .buttonStyle(
+                                    CustomButtonStyle(
+                                        cornerRadii: .init(
+                                            topLeading: 30,
+                                            bottomLeading: 30,
+                                            bottomTrailing: 8,
+                                            topTrailing: 8
+                                        )
+                                    )
+                                )
+                                .compositingGroup()
+                                .allowsHitTesting(true)
 
-                            }) {
-                                HStack {
-                                    Text("Play")
-                                        .font(Font.custom("LondrinaSolid-Regular", size: 20))
-                                    Image(systemName: "play.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
+                                Button(action: {
+
+                                }) {
+                                    HStack {
+                                        Text("Play")
+                                            .font(
+                                                Font.custom(
+                                                    "LondrinaSolid-Regular",
+                                                    size: 20
+                                                )
+                                            )
+                                        Image(systemName: "play.fill")
+                                            .resizable()
+                                            .frame(width: 12, height: 12)
+                                    }
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 5)
+                                    .contentShape(
+                                        RoundedRectangle(cornerRadius: 12)
+                                    )
+                                    .shadow(radius: 0, x: 0, y: 5)
                                 }
-                                .padding(.horizontal, 15)
-                                .padding(.vertical, 5)
-                                .contentShape(RoundedRectangle(cornerRadius: 12))
-                                .shadow(radius: 0, x: 0, y: 5)
+                                .frame(minWidth: 85)
+                                .buttonStyle(
+                                    CustomButtonStyle(
+                                        cornerRadii: .init(
+                                            topLeading: 8,
+                                            bottomLeading: 8,
+                                            bottomTrailing: 30,
+                                            topTrailing: 30
+                                        )
+                                    )
+                                )
+                                .compositingGroup()
+                                .allowsHitTesting(true)
                             }
-                            .buttonStyle(CustomButtonStyle(cornerRadii: .init(
-                                topLeading: 8,
-                                bottomLeading: 8,
-                                bottomTrailing: 30,
-                                topTrailing: 30
-                            )))
-                            .compositingGroup()
-                            .allowsHitTesting(true)
+                            .padding(.top, 10)
+                            .padding(.bottom, 15)
+                            .padding(.horizontal, 10)
+                            .background(Color.colorOrange200)
+
+                            .clipShape(
+                                UnevenRoundedRectangle(
+                                    cornerRadii: .init(
+                                        topLeading: 0,
+                                        bottomLeading: 20,
+                                        bottomTrailing: 20,
+                                        topTrailing: 0
+                                    )
+                                )
+                            )
+
+                            .background(
+                                UnevenRoundedRectangle(
+                                    cornerRadii: .init(
+                                        topLeading: 0,
+                                        bottomLeading: 20,
+                                        bottomTrailing: 20,
+                                        topTrailing: 0
+                                    )
+                                )
+                                .fill(Color.colorOrange300)
+                                .shadow(
+                                    color: Color.colorOrangeShadow,
+                                    radius: 0,
+                                    x: 0,
+                                    y: 5
+                                )
+                            )
+                            Rectangle()
+                                .fill(Color.white.opacity(0.15))
+                                .frame(maxWidth: .infinity, maxHeight: 5)
                         }
-                        .padding(.vertical, 20)
-                        .background(Color.colorOrange300)
-                        
-                        
-                        
-                        
+
+
                     }
-                    
+
                 }
             }
         }
