@@ -13,8 +13,8 @@ struct TopBarLevel: View {
 
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
-                VStack {
+            HStack(alignment: .top, spacing: 0) {
+                VStack() {
                     ZStack(alignment: .bottom) {
 
                         HStack(spacing: 20) {
@@ -29,16 +29,16 @@ struct TopBarLevel: View {
                             Line()
                                 .stroke(
                                     style: StrokeStyle(
-                                        lineWidth: 10,
+                                        lineWidth: 8,
                                         lineCap: .round,
                                         dash: [20, 25]
                                     )
                                 )
-                                .foregroundStyle(.colorBeige100.opacity(0.5))
+                                .foregroundStyle(.colorBeige100.opacity(0.25))
                                 .frame(height: 1)
                                 .frame(minWidth: 1)
                         }
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 8)
                         .padding(.horizontal, 10)
                         .background(
                             Color.clear
@@ -86,12 +86,9 @@ struct TopBarLevel: View {
                             .fill(Color.white.opacity(0.15))
                             .frame(maxWidth: .infinity, maxHeight: 5)
                     }
-
-                    Spacer()
                 }
 
                 ZStack(alignment: .bottom) {
-                    
 
                     HStack(spacing: 5) {
                         Spacer()
