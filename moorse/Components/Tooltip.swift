@@ -73,7 +73,7 @@ struct PressAndReleaseButtonStyle: ButtonStyle {
     }
 }
 
-struct Tooltip: View {
+struct Tooltip1: View {
     @State private var offset = CGSize.zero
     @State private var showingTooltip = false
     let buttonTitle: String
@@ -148,6 +148,54 @@ struct Tooltip: View {
     }
 }
 
+struct Tooltip: View {
+    let showingTooltip: Bool
+    var morseCode: String = "."
+    var body: some View {
+        ZStack {
+            if showingTooltip {
+                HStack {
+                    ForEach(Array(morseCode), id: \.self) { character in
+                        
+                        if character == "." {
+                            DotSmall()
+                        } else {
+                            LineSmall()
+                        }
+                    }
+                }
+                .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                        radius: 0,
+                        x: 0,
+                        y: 3)
+                .padding()
+                .foregroundColor(.colorMaroon300)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.colorBeige100)
+                        .shadow(
+                            color: Color.colorMaroonOrange200.opacity(0.3),
+                            radius: 0,
+                            x: 0,
+                            y: 5
+                        )
+                    
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.white.opacity(0.3),
+                                lineWidth: 5
+                               )
+                        .blur(radius: 0)
+                        .offset(y: -3)
+                        .mask(RoundedRectangle(cornerRadius: 20))
+                )
+                .offset(y: -60)
+                .fixedSize()
+            }
+        }}}
+
 #Preview {
-    Tooltip(buttonTitle: "Press", tooltipText: "presssdsd me")
+    Tooltip1(buttonTitle: "Press", tooltipText: "presssdsd me")
 }
+
