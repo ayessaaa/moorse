@@ -1,5 +1,5 @@
 //
-//  SimpleButton.swift
+//  Tooltip.swift
 //  moorse
 //
 //  Created by yessa on 3/29/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SimpleButton: ButtonStyle {
+struct PressAndReleaseButtonStyle: ButtonStyle {
     let colorMain: Color
     let colorShadow: Color
     var cornerRadii: RectangleCornerRadii = .init(
@@ -20,6 +20,8 @@ struct SimpleButton: ButtonStyle {
     var onRelease: () -> Void
 
     func makeBody(configuration: Configuration) -> some View {
+        // The configuration.isPressed state tells you if the button is currently being held down.
+        // You can use this state to trigger actions or change the UI appearance.
         configuration.label
             .onChange(of: configuration.isPressed) { oldValue, newValue in
                 // Fire only on state transitions
@@ -29,7 +31,6 @@ struct SimpleButton: ButtonStyle {
                     onRelease()
                 }
             }
-
             .font(.title)
             .foregroundStyle(.colorBeige100)
             .background(
@@ -72,17 +73,81 @@ struct SimpleButton: ButtonStyle {
     }
 }
 
-#Preview("SimpleButton style") {
-    Button("Tap me") {}
+struct Tooltip: View {
+    @State private var offset = CGSize.zero
+    @State private var showingTooltip = false
+    let buttonTitle: String
+    let tooltipText: String
+
+    var body: some View {
+        Button(action: {
+
+        }) {
+            Text(buttonTitle)
+                .padding()
+                .foregroundColor(.white)
+        }
         .buttonStyle(
-            SimpleButton(
+            PressAndReleaseButtonStyle(
                 colorMain: .colorOrange200,
                 colorShadow: .colorOrangeShadow,
                 onPress: {
-                    print("Button was pressed down!")                },
+                    print("Button was pressed down!")
+                    showingTooltip = true
+                },
                 onRelease: {
                     print("Button was released!")
+                    showingTooltip = false
                 }
             )
         )
+
+        .overlay(
+            // The custom tooltip view
+            ZStack {
+                if showingTooltip {
+                    HStack {
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .frame(width: 8, height: 8)
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .frame(width: 30, height: 8)
+                            
+                    }
+                    .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                            radius: 0,
+                            x: 0,
+                            y: 3)
+                    .padding()
+                    .foregroundColor(.colorMaroon300)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.colorBeige100)
+                            .shadow(
+                                color: Color.colorMaroonOrange200.opacity(0.3),
+                                radius: 0,
+                                x: 0,
+                                y: 5
+                            )
+                            
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.white.opacity(0.3),
+                                lineWidth: 5
+                            )
+                            .blur(radius: 0)
+                            .offset(y: -3)
+                            .mask(RoundedRectangle(cornerRadius: 20))
+                    )
+                    .offset(y: -70)
+                    .fixedSize()
+                }
+            }
+        )
+
+    }
+}
+
+#Preview {
+    Tooltip(buttonTitle: "Press", tooltipText: "presssdsd me")
 }

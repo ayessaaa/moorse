@@ -17,6 +17,12 @@ struct Line: Shape {
 }
 
 struct Home: View {
+    @State private var showingTooltipA = false
+    @State private var showingTooltipE = false
+    @State private var showingTooltipI = false
+    @State private var showingTooltipN = false
+    @State private var showingTooltipT = false
+    
     var body: some View {
         VStack(spacing: 5) {
             HStack {
@@ -78,8 +84,56 @@ struct Home: View {
                                         bottomLeading: 20,
                                         bottomTrailing: 20,
                                         topTrailing: 20
-                                    )
+                                    ),
+                                    onPress: {
+                                        print("Button was pressed down!")
+                                        showingTooltipA = true
+                                    },
+                                    onRelease: {
+                                        print("Button was released!")
+                                        showingTooltipA = false
+                                    }
+                                    
                                 )
+                            )
+                            .overlay(
+                                // The custom tooltip view
+                                ZStack {
+                                    if showingTooltipA {
+                                        HStack {
+                                            DotSmall()
+                                            LineSmall()
+                                        }
+                                        .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                                                radius: 0,
+                                                x: 0,
+                                                y: 3)
+                                        .padding()
+                                        .foregroundColor(.colorMaroon300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.colorBeige100)
+                                                .shadow(
+                                                    color: Color.colorMaroonOrange200.opacity(0.3),
+                                                    radius: 0,
+                                                    x: 0,
+                                                    y: 5
+                                                )
+                                                
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.white.opacity(0.3),
+                                                    lineWidth: 5
+                                                )
+                                                .blur(radius: 0)
+                                                .offset(y: -3)
+                                                .mask(RoundedRectangle(cornerRadius: 20))
+                                        )
+                                        .offset(y: -60)
+                                        .fixedSize()
+                                    }
+                                }
                             )
                             
                             Button(action: {
@@ -102,8 +156,55 @@ struct Home: View {
                                         bottomLeading: 20,
                                         bottomTrailing: 20,
                                         topTrailing: 20
-                                    )
+                                    ),
+                                    onPress: {
+                                        print("Button was pressed down!")
+                                        showingTooltipE = true
+                                    },
+                                    onRelease: {
+                                        print("Button was released!")
+                                        showingTooltipE = false
+                                    }
                                 )
+                            )
+                            .overlay(
+                                // The custom tooltip view
+                                ZStack {
+                                    if showingTooltipE {
+                                        HStack {
+                                            DotSmall()
+                                                
+                                        }
+                                        .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                                                radius: 0,
+                                                x: 0,
+                                                y: 3)
+                                        .padding()
+                                        .foregroundColor(.colorMaroon300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.colorBeige100)
+                                                .shadow(
+                                                    color: Color.colorMaroonOrange200.opacity(0.3),
+                                                    radius: 0,
+                                                    x: 0,
+                                                    y: 5
+                                                )
+                                                
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.white.opacity(0.3),
+                                                    lineWidth: 5
+                                                )
+                                                .blur(radius: 0)
+                                                .offset(y: -3)
+                                                .mask(RoundedRectangle(cornerRadius: 20))
+                                        )
+                                        .offset(y: -60)
+                                        .fixedSize()
+                                    }
+                                }
                             )
                             
                             Button(action: {
@@ -126,8 +227,55 @@ struct Home: View {
                                         bottomLeading: 20,
                                         bottomTrailing: 20,
                                         topTrailing: 20
-                                    )
+                                    ),onPress: {
+                                        print("Button was pressed down!")
+                                        showingTooltipI = true
+                                    },
+                                    onRelease: {
+                                        print("Button was released!")
+                                        showingTooltipI = false
+                                    }
                                 )
+                            )
+                            .overlay(
+                                // The custom tooltip view
+                                ZStack {
+                                    if showingTooltipI {
+                                        HStack {
+                                            DotSmall()
+                                            DotSmall()
+                                                
+                                        }
+                                        .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                                                radius: 0,
+                                                x: 0,
+                                                y: 3)
+                                        .padding()
+                                        .foregroundColor(.colorMaroon300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.colorBeige100)
+                                                .shadow(
+                                                    color: Color.colorMaroonOrange200.opacity(0.3),
+                                                    radius: 0,
+                                                    x: 0,
+                                                    y: 5
+                                                )
+                                                
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.white.opacity(0.3),
+                                                    lineWidth: 5
+                                                )
+                                                .blur(radius: 0)
+                                                .offset(y: -3)
+                                                .mask(RoundedRectangle(cornerRadius: 20))
+                                        )
+                                        .offset(y: -60)
+                                        .fixedSize()
+                                    }
+                                }
                             )
                             
                             
@@ -155,8 +303,55 @@ struct Home: View {
                                         bottomLeading: 20,
                                         bottomTrailing: 20,
                                         topTrailing: 20
-                                    )
+                                    ),onPress: {
+                                        print("Button was pressed down!")
+                                        showingTooltipN = true
+                                    },
+                                    onRelease: {
+                                        print("Button was released!")
+                                        showingTooltipN = false
+                                    }
                                 )
+                            )
+                            .overlay(
+                                // The custom tooltip view
+                                ZStack {
+                                    if showingTooltipN {
+                                        HStack {
+                                            LineSmall()
+                                            DotSmall()
+                                                
+                                        }
+                                        .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                                                radius: 0,
+                                                x: 0,
+                                                y: 3)
+                                        .padding()
+                                        .foregroundColor(.colorMaroon300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.colorBeige100)
+                                                .shadow(
+                                                    color: Color.colorMaroonOrange200.opacity(0.3),
+                                                    radius: 0,
+                                                    x: 0,
+                                                    y: 5
+                                                )
+                                                
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.white.opacity(0.3),
+                                                    lineWidth: 5
+                                                )
+                                                .blur(radius: 0)
+                                                .offset(y: -3)
+                                                .mask(RoundedRectangle(cornerRadius: 20))
+                                        )
+                                        .offset(y: -60)
+                                        .fixedSize()
+                                    }
+                                }
                             )
                             
                             Button(action: {
@@ -179,8 +374,54 @@ struct Home: View {
                                         bottomLeading: 20,
                                         bottomTrailing: 20,
                                         topTrailing: 20
-                                    )
+                                    ),onPress: {
+                                        print("Button was pressed down!")
+                                        showingTooltipT = true
+                                    },
+                                    onRelease: {
+                                        print("Button was released!")
+                                        showingTooltipT = false
+                                    }
                                 )
+                            )
+                            .overlay(
+                                // The custom tooltip view
+                                ZStack {
+                                    if showingTooltipT {
+                                        HStack {
+                                            LineSmall()
+                                                
+                                        }
+                                        .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                                                radius: 0,
+                                                x: 0,
+                                                y: 3)
+                                        .padding()
+                                        .foregroundColor(.colorMaroon300)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.colorBeige100)
+                                                .shadow(
+                                                    color: Color.colorMaroonOrange200.opacity(0.3),
+                                                    radius: 0,
+                                                    x: 0,
+                                                    y: 5
+                                                )
+                                                
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.white.opacity(0.3),
+                                                    lineWidth: 5
+                                                )
+                                                .blur(radius: 0)
+                                                .offset(y: -3)
+                                                .mask(RoundedRectangle(cornerRadius: 20))
+                                        )
+                                        .offset(y: -60)
+                                        .fixedSize()
+                                    }
+                                }
                             )
                         }
                     }
@@ -190,6 +431,8 @@ struct Home: View {
                 .background(Image("Level1BG"))
                 
             }
+            
+            
         }
     }
 }
