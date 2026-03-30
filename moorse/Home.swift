@@ -428,12 +428,17 @@ struct Home: View {
                     .padding(.vertical, 20)
                 }
                 .frame(maxWidth: .infinity)
-                .background(Image("Level1BG"))
+                .background(Image("Level1BG")
+                    .resizable()
+                    .scaledToFill())
+                
                 
             }
             
             
         }
+        .navigationBarBackButtonHidden(true)
+        .background(.colorBeige100)
     }
 }
 

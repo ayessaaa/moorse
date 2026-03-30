@@ -21,12 +21,12 @@ struct CustomButtonStyle: ButtonStyle {
             .font(.title)
             .foregroundStyle(.colorBeige100)
             .background(
-                        Image("ButtonBG")
-                            .resizable()
-                            .scaledToFill()
-                    )
-                    .clipShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
-                    .contentShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
+                Image("ButtonBG")
+                    .resizable()
+                    .scaledToFill()
+            )
+            .clipShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
+            .contentShape(UnevenRoundedRectangle(cornerRadii: cornerRadii))
             .shadow(
                 color: configuration.isPressed
                     ? Color.colorMaroonOrange200.opacity(0)
@@ -65,49 +65,56 @@ struct CustomButtonStyle: ButtonStyle {
 
 struct Menu: View {
     var body: some View {
-        VStack {
-            Image("LogoTitle")
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 30)
+        NavigationView {
+            VStack {
+                Image("LogoTitle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 30)
 
-            Image("LogoSubtitle")
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 30)
-                .padding(.top, -5)
-                .padding(.bottom, 150)
+                Image("LogoSubtitle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 30)
+                    .padding(.top, -5)
+                    .padding(.bottom, 150)
 
-            Button(action: {
-
-            }) {
-                HStack {
-                    Text("Get Started")
-                        .font(Font.custom("LondrinaSolid-Regular", size: 26))
-                        .padding(.trailing, 5)
-                    Image(systemName: "play.fill")
-                        .resizable()
-                        .frame(width: 16, height: 16)
+                VStack {
+                    NavigationLink(destination: Home()) {
+                        HStack {
+                            Text("Get Started")
+                                .font(
+                                    Font.custom(
+                                        "LondrinaSolid-Regular",
+                                        size: 26
+                                    )
+                                )
+                                .padding(.trailing, 5)
+                            Image(systemName: "play.fill")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                        }
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 10)
+                        .shadow(radius: 0, x: 0, y: 5)
+                    }
+                    .buttonStyle(CustomButtonStyle())
                 }
-                .padding(.horizontal, 40)
-                .padding(.vertical, 10)
-                .shadow(radius: 0, x: 0, y: 5)
+
 
             }
-            .buttonStyle(CustomButtonStyle())
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                Image("BG")
+                    .resizable()
+                    .scaledToFill()
 
+            )
+            .ignoresSafeArea()
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Image("BG")
-                .resizable()
-                .scaledToFill()
-
-        )
-        .ignoresSafeArea()
     }
 }
 

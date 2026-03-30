@@ -17,7 +17,7 @@ struct TopBarLevel: View {
                 VStack {
                     ZStack(alignment: .bottom) {
 
-                        HStack(spacing: 10) {
+                        HStack(spacing: 20) {
                             HStack {
                                 Image(systemName: "star.fill")
                                 Image(systemName: "star.fill")
@@ -31,7 +31,7 @@ struct TopBarLevel: View {
                                     style: StrokeStyle(
                                         lineWidth: 10,
                                         lineCap: .round,
-                                        dash: [15, 25]
+                                        dash: [20, 25]
                                     )
                                 )
                                 .foregroundStyle(.colorBeige100.opacity(0.5))
@@ -39,7 +39,7 @@ struct TopBarLevel: View {
                                 .frame(minWidth: 1)
                         }
                         .padding(.vertical, 5)
-                        .padding(.horizontal, 5)
+                        .padding(.horizontal, 10)
                         .background(
                             Color.clear
                                 .background(Color.colorOrange200)
@@ -91,8 +91,10 @@ struct TopBarLevel: View {
                 }
 
                 ZStack(alignment: .bottom) {
+                    
 
-                    HStack(spacing: 3) {
+                    HStack(spacing: 5) {
+                        Spacer()
                         Button(action: {
 
                         }) {
@@ -168,10 +170,10 @@ struct TopBarLevel: View {
                         )
                         .compositingGroup()
                         .allowsHitTesting(true)
+                        Spacer()
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .padding(.horizontal, 10)
                     .background(Color.colorOrange200)
 
                     .clipShape(
