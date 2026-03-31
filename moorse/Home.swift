@@ -255,6 +255,9 @@ struct Home: View {
                                     Tooltip(showingTooltip: showingTooltipT, morseCode: "-")
                                 )
                             }
+                            
+                            ProgressBar(color: .colorOrange200, foregroundColor: .colorBeige100,shadowColor: .colorOrangeShadow, text: "Progress")
+                                .padding(.horizontal, 50)
                         }
                         .padding(.vertical, 20)
                     }
