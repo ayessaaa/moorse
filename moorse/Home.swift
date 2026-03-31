@@ -63,7 +63,7 @@ struct Home: View {
                             .resizable()
                             .scaledToFill()
                     
-                    VStack  {
+                    VStack (spacing: 30) {
                         
                         TopBarLevel(
                             colorMain: .colorOrange200,
@@ -256,12 +256,14 @@ struct Home: View {
                                 )
                             }
                             
-                            ProgressBar(color: .colorOrange200, foregroundColor: .colorBeige100,shadowColor: .colorOrangeShadow, text: "Progress")
-                                .padding(.horizontal, 50)
+                            
                         }
-                        .padding(.vertical, 20)
+//                        .padding(.vertical, 20)
+                        ProgressBar(color: .colorOrange200, foregroundColor: .colorBeige100,shadowColor: .colorOrangeShadow, text: "Progress")
+                            .padding(.horizontal, 50)
                     }
                     .frame(maxWidth: .infinity)
+//                    .offset(x: -5)
                 }
                 
 
