@@ -24,7 +24,7 @@ struct TopBarLevel: View {
                                 Image(systemName: "star.fill")
                             }
                             .foregroundStyle(
-                                Color.colorOrangeShadow.opacity(0.5)
+                                colorShadow.opacity(0.5)
                             )
                             Line()
                                 .stroke(
@@ -42,9 +42,9 @@ struct TopBarLevel: View {
                         .padding(.horizontal, 10)
                         .background(
                             Color.clear
-                                .background(Color.colorOrange200)
+                                .background(colorMain)
                                 .shadow(
-                                    color: Color.colorOrangeShadow,
+                                    color: colorShadow,
                                     radius: 0,
                                     x: 0,
                                     y: 5
@@ -171,7 +171,7 @@ struct TopBarLevel: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 15)
-                    .background(Color.colorOrange200)
+                    .background(colorMain)
 
                     .clipShape(
                         UnevenRoundedRectangle(
@@ -195,7 +195,7 @@ struct TopBarLevel: View {
                         )
                         .fill(Color.colorOrange300)
                         .shadow(
-                            color: Color.colorOrangeShadow,
+                            color: colorShadow,
                             radius: 0,
                             x: 0,
                             y: 5

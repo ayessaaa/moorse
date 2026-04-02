@@ -150,6 +150,7 @@ struct Tooltip1: View {
 
 struct Tooltip: View {
     let showingTooltip: Bool
+    let colorShadow: Color
     var morseCode: String = "."
     var body: some View {
         ZStack {
@@ -164,7 +165,7 @@ struct Tooltip: View {
                         }
                     }
                 }
-                .shadow(color: Color.colorMaroonOrange200.opacity(0.3),
+                .shadow(color: Color.colorMaroon300.opacity(0.3),
                         radius: 0,
                         x: 0,
                         y: 3)
@@ -174,7 +175,7 @@ struct Tooltip: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.colorBeige100)
                         .shadow(
-                            color: Color.colorMaroonOrange200.opacity(0.3),
+                            color: colorShadow.opacity(0.5),
                             radius: 0,
                             x: 0,
                             y: 5

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LevelSection: View {
+    var numberOfLetters: Int = 5
+    
+    
     let letter1: String
     let letter2: String
     let letter3: String
@@ -31,6 +34,8 @@ struct LevelSection: View {
     @State private var showingTooltip5 = false
 
     var body: some View {
+        
+        
 
         ZStack(alignment: .top) {
 
@@ -82,6 +87,7 @@ struct LevelSection: View {
                         .overlay(
                             Tooltip(
                                 showingTooltip: showingTooltip1,
+                                colorShadow: colorShadow,
                                 morseCode: morse1
                             )
                         )
@@ -121,6 +127,7 @@ struct LevelSection: View {
                         .overlay(
                             Tooltip(
                                 showingTooltip: showingTooltip2,
+                                colorShadow: colorShadow,
                                 morseCode: morse2
                             )
                         )
@@ -160,6 +167,7 @@ struct LevelSection: View {
                         .overlay(
                             Tooltip(
                                 showingTooltip: showingTooltip3,
+                                colorShadow: colorShadow,
                                 morseCode: morse3
                             )
                         )
@@ -202,6 +210,7 @@ struct LevelSection: View {
                         .overlay(
                             Tooltip(
                                 showingTooltip: showingTooltip4,
+                                colorShadow: colorShadow,
                                 morseCode: morse4
                             )
                         )
@@ -241,6 +250,7 @@ struct LevelSection: View {
                         .overlay(
                             Tooltip(
                                 showingTooltip: showingTooltip5,
+                                colorShadow: colorShadow,
                                 morseCode: morse5
                             )
                         )

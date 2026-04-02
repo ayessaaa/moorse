@@ -58,6 +58,7 @@ struct Home: View {
             ScrollView {
 
                 VStack(spacing: 0) {
+                    
                     // LEVEL 1
                     LevelSection(
                         letter1: "A",
@@ -74,10 +75,63 @@ struct Home: View {
                         colorShadow: .colorOrangeShadow,
                         bgImg: "Level1BG"
                     )
+                    
+                    // LEVEL 2
+                    LevelSection(
+                        letter1: "G",
+                        letter2: "K",
+                        letter3: "L",
+                        letter4: "O",
+                        letter5: "S",
+                        morse1: "--.",
+                        morse2: "-.-",
+                        morse3: ".-..",
+                        morse4: "---",
+                        morse5: "...",
+                        colorMain: .colorGreen200,
+                        colorShadow: .colorGreenShadow,
+                        bgImg: "Level2BG"
+                    )
+                    
+                    // LEVEL 3
+                    LevelSection(
+                        letter1: "D",
+                        letter2: "H",
+                        letter3: "R",
+                        letter4: "U",
+                        letter5: "W",
+                        morse1: "-..",
+                        morse2: "....",
+                        morse3: ".-.",
+                        morse4: "..-",
+                        morse5: ".--",
+                        colorMain: .colorBlue200,
+                        colorShadow: .colorBlueShadow,
+                        bgImg: "Level3BG"
+                    )
+                    
+                    // LEVEL 4
+                    LevelSection(
+                        letter1: "B",
+                        letter2: "C",
+                        letter3: "F",
+                        letter4: "J",
+                        letter5: "L",
+                        morse1: "-...",
+                        morse2: "-.-.",
+                        morse3: "..-.",
+                        morse4: ".---",
+                        morse5: ".-..",
+                        colorMain: .colorPink200,
+                        colorShadow: .colorPinkShadow,
+                        bgImg: "Level4BG"
+                    )
+
 
                 }
 
             }
+            .background(.colorOrange200)
 
         }
         .navigationBarBackButtonHidden(true)
