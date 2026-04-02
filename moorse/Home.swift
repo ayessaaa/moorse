@@ -56,216 +56,26 @@ struct Home: View {
             .font(Font.custom("LondrinaSolid-Regular", size: 36))
 
             ScrollView {
-                
-                ZStack (alignment: .top){
-                    
-                        Image("Level1BG")
-                            .resizable()
-                            .scaledToFill()
-                    
-                    VStack (spacing: 30) {
-                        
-                        TopBarLevel(
-                            colorMain: .colorOrange200,
-                            colorShadow: .colorOrangeShadow
-                        )
-                        VStack(spacing: 40) {
-                            HStack(spacing: 50) {
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("A")
-                                        .font(
-                                            Font.custom(
-                                                "LondrinaSolid-Regular",
-                                                size: 42
-                                            )
-                                        )
-                                        .padding(.horizontal, 30)
-                                        .padding(.vertical, 10)
-                                    
-                                }
-                                .buttonStyle(
-                                    SimpleButton(
-                                        colorMain: .colorOrange200,
-                                        colorShadow: .colorOrangeShadow,
-                                        cornerRadii: .init(
-                                            topLeading: 20,
-                                            bottomLeading: 20,
-                                            bottomTrailing: 20,
-                                            topTrailing: 20
-                                        ),
-                                        onPress: {
-                                            showingTooltipA = true
-                                        },
-                                        onRelease: {
-                                            showingTooltipA = false
-                                        }
-                                        
-                                    )
-                                )
-                                .overlay(
-                                    Tooltip(showingTooltip: showingTooltipA, morseCode: ".-")
-                                )
-                                
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("E")
-                                        .font(
-                                            Font.custom(
-                                                "LondrinaSolid-Regular",
-                                                size: 42
-                                            )
-                                        )
-                                        .padding(.horizontal, 30)
-                                        .padding(.vertical, 10)
-                                    
-                                }
-                                .buttonStyle(
-                                    SimpleButton(
-                                        colorMain: .colorOrange200,
-                                        colorShadow: .colorOrangeShadow,
-                                        cornerRadii: .init(
-                                            topLeading: 20,
-                                            bottomLeading: 20,
-                                            bottomTrailing: 20,
-                                            topTrailing: 20
-                                        ),
-                                        onPress: {
-                                            showingTooltipE = true
-                                        },
-                                        onRelease: {
-                                            showingTooltipE = false
-                                        }
-                                    )
-                                )
-                                .overlay(
-                                    Tooltip(showingTooltip: showingTooltipE, morseCode: ".")
-                                )
-                                
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("I")
-                                        .font(
-                                            Font.custom(
-                                                "LondrinaSolid-Regular",
-                                                size: 42
-                                            )
-                                        )
-                                        .padding(.horizontal, 30)
-                                        .padding(.vertical, 10)
-                                    
-                                }
-                                .buttonStyle(
-                                    SimpleButton(
-                                        colorMain: .colorOrange200,
-                                        colorShadow: .colorOrangeShadow,
-                                        cornerRadii: .init(
-                                            topLeading: 20,
-                                            bottomLeading: 20,
-                                            bottomTrailing: 20,
-                                            topTrailing: 20
-                                        ),
-                                        onPress: {
-                                            showingTooltipI = true
-                                        },
-                                        onRelease: {
-                                            showingTooltipI = false
-                                        }
-                                    )
-                                )
-                                .overlay(
-                                    Tooltip(showingTooltip: showingTooltipI, morseCode: "..")
-                                )
-                                
-                            }
-                            
-                            HStack(spacing: 50) {
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("N")
-                                        .font(
-                                            Font.custom(
-                                                "LondrinaSolid-Regular",
-                                                size: 42
-                                            )
-                                        )
-                                        .padding(.horizontal, 30)
-                                        .padding(.vertical, 10)
-                                    
-                                }
-                                .buttonStyle(
-                                    SimpleButton(
-                                        colorMain: .colorOrange200,
-                                        colorShadow: .colorOrangeShadow,
-                                        cornerRadii: .init(
-                                            topLeading: 20,
-                                            bottomLeading: 20,
-                                            bottomTrailing: 20,
-                                            topTrailing: 20
-                                        ),
-                                        onPress: {
-                                            showingTooltipN = true
-                                        },
-                                        onRelease: {
-                                            showingTooltipN = false
-                                        }
-                                    )
-                                )
-                                .overlay(
-                                    Tooltip(showingTooltip: showingTooltipN, morseCode: "-.")
-                                )
-                                
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("T")
-                                        .font(
-                                            Font.custom(
-                                                "LondrinaSolid-Regular",
-                                                size: 42
-                                            )
-                                        )
-                                        .padding(.horizontal, 30)
-                                        .padding(.vertical, 10)
-                                    
-                                }
-                                .buttonStyle(
-                                    SimpleButton(
-                                        colorMain: .colorOrange200,
-                                        colorShadow: .colorOrangeShadow,
-                                        cornerRadii: .init(
-                                            topLeading: 20,
-                                            bottomLeading: 20,
-                                            bottomTrailing: 20,
-                                            topTrailing: 20
-                                        ),
-                                        onPress: {
-                                            showingTooltipT = true
-                                        },
-                                        onRelease: {
-                                            showingTooltipT = false
-                                        }
-                                    )
-                                )
-                                .overlay(
-                                    Tooltip(showingTooltip: showingTooltipT, morseCode: "-")
-                                )
-                            }
-                            
-                            
-                        }
-//                        .padding(.vertical, 20)
-                        ProgressBar(color: .colorOrange200, foregroundColor: .colorBeige100,shadowColor: .colorOrangeShadow, text: "Progress")
-                            .padding(.horizontal, 50)
-                    }
-                    .frame(maxWidth: .infinity)
-//                    .offset(x: -5)
+
+                VStack(spacing: 0) {
+                    // LEVEL 1
+                    LevelSection(
+                        letter1: "A",
+                        letter2: "E",
+                        letter3: "I",
+                        letter4: "N",
+                        letter5: "T",
+                        morse1: ".-",
+                        morse2: ".",
+                        morse3: "..",
+                        morse4: "-.",
+                        morse5: "-",
+                        colorMain: .colorOrange200,
+                        colorShadow: .colorOrangeShadow,
+                        bgImg: "Level1BG"
+                    )
+
                 }
-                
 
             }
 
