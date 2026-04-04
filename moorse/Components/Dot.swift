@@ -14,6 +14,13 @@ struct DotSmall: View {
     }
 }
 
+struct DotLarge: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .frame(width: 20, height: 20)
+    }
+}
+
 #Preview {
-    DotSmall()
+    DotLarge()
 }

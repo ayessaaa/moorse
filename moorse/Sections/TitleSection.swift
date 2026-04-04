@@ -21,7 +21,7 @@ struct TitleSection: View {
                 RoundedRectangle(cornerRadius: 0)
                     .fill(Color.colorBeige100)
                     .shadow(
-                        color: Color.colorMaroonOrange200.opacity(0.3),
+                        color: Color.colorBeigeShadow,
                         radius: 0,
                         x: 0,
                         y: 5
@@ -39,6 +39,7 @@ struct TitleSection: View {
         .background(Color.colorBeige100)
         .font(Font.custom("LondrinaSolid-Regular", size: 36))
     }
+    
 }
 
 #Preview {

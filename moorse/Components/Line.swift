@@ -14,6 +14,13 @@ struct LineSmall: View {
     }
 }
 
+struct LineLarge: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .frame(width: 60, height: 20)
+    }
+}
+
 #Preview {
     LineSmall()
 }
