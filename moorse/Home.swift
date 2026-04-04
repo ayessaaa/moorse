@@ -55,83 +55,117 @@ struct Home: View {
             .background(Color.colorBeige100)
             .font(Font.custom("LondrinaSolid-Regular", size: 36))
 
-            ScrollView {
+            ZStack {
+                VStack (spacing:0){
+                    Color.colorOrange200
+                    Color.colorPurple200
+                }
+                .ignoresSafeArea()
+                
+                ScrollView {
 
-                VStack(spacing: 0) {
-                    
-                    // LEVEL 1
-                    LevelSection(
-                        letter1: "A",
-                        letter2: "E",
-                        letter3: "I",
-                        letter4: "N",
-                        letter5: "T",
-                        morse1: ".-",
-                        morse2: ".",
-                        morse3: "..",
-                        morse4: "-.",
-                        morse5: "-",
-                        colorMain: .colorOrange200,
-                        colorShadow: .colorOrangeShadow,
-                        bgImg: "Level1BG"
-                    )
-                    
-                    // LEVEL 2
-                    LevelSection(
-                        letter1: "G",
-                        letter2: "K",
-                        letter3: "L",
-                        letter4: "O",
-                        letter5: "S",
-                        morse1: "--.",
-                        morse2: "-.-",
-                        morse3: ".-..",
-                        morse4: "---",
-                        morse5: "...",
-                        colorMain: .colorGreen200,
-                        colorShadow: .colorGreenShadow,
-                        bgImg: "Level2BG"
-                    )
-                    
-                    // LEVEL 3
-                    LevelSection(
-                        letter1: "D",
-                        letter2: "H",
-                        letter3: "R",
-                        letter4: "U",
-                        letter5: "W",
-                        morse1: "-..",
-                        morse2: "....",
-                        morse3: ".-.",
-                        morse4: "..-",
-                        morse5: ".--",
-                        colorMain: .colorBlue200,
-                        colorShadow: .colorBlueShadow,
-                        bgImg: "Level3BG"
-                    )
-                    
-                    // LEVEL 4
-                    LevelSection(
-                        letter1: "B",
-                        letter2: "C",
-                        letter3: "F",
-                        letter4: "J",
-                        letter5: "L",
-                        morse1: "-...",
-                        morse2: "-.-.",
-                        morse3: "..-.",
-                        morse4: ".---",
-                        morse5: ".-..",
-                        colorMain: .colorPink200,
-                        colorShadow: .colorPinkShadow,
-                        bgImg: "Level4BG"
-                    )
+                    VStack(spacing: 0) {
 
+                        // LEVEL 1
+                        LevelSection(
+                            letter1: "A",
+                            letter2: "E",
+                            letter3: "I",
+                            letter4: "N",
+                            letter5: "T",
+                            morse1: ".-",
+                            morse2: ".",
+                            morse3: "..",
+                            morse4: "-.",
+                            morse5: "-",
+                            colorMain: .colorOrange200,
+                            colorShadow: .colorOrangeShadow,
+                            bgImg: "Level1BG"
+                        )
+
+                        // LEVEL 2
+                        LevelSection(
+                            letter1: "G",
+                            letter2: "K",
+                            letter3: "L",
+                            letter4: "O",
+                            letter5: "S",
+                            morse1: "--.",
+                            morse2: "-.-",
+                            morse3: ".-..",
+                            morse4: "---",
+                            morse5: "...",
+                            colorMain: .colorGreen200,
+                            colorShadow: .colorGreenShadow,
+                            bgImg: "Level2BG"
+                        )
+
+                        // LEVEL 3
+                        LevelSection(
+                            letter1: "D",
+                            letter2: "H",
+                            letter3: "R",
+                            letter4: "U",
+                            letter5: "W",
+                            morse1: "-..",
+                            morse2: "....",
+                            morse3: ".-.",
+                            morse4: "..-",
+                            morse5: ".--",
+                            colorMain: .colorBlue200,
+                            colorShadow: .colorBlueShadow,
+                            bgImg: "Level3BG"
+                        )
+
+                        // LEVEL 4
+                        LevelSection(
+                            letter1: "B",
+                            letter2: "C",
+                            letter3: "F",
+                            letter4: "J",
+                            letter5: "L",
+                            morse1: "-...",
+                            morse2: "-.-.",
+                            morse3: "..-.",
+                            morse4: ".---",
+                            morse5: ".-..",
+                            colorMain: .colorPink200,
+                            colorShadow: .colorPinkShadow,
+                            bgImg: "Level4BG"
+                        )
+
+                        // LEVEL 5
+                        LevelSection(
+                            numberOfLetters: 3,
+                            letter1: "P",
+                            letter2: "Q",
+                            letter3: "V",
+                            morse1: ".--.",
+                            morse2: "--.-",
+                            morse3: "...-",
+                            colorMain: .colorRed200,
+                            colorShadow: .colorRedShadow,
+                            bgImg: "Level5BG"
+                        )
+
+                        // LEVEL 6
+                        LevelSection(
+                            numberOfLetters: 3,
+                            letter1: "X",
+                            letter2: "Y",
+                            letter3: "Z",
+                            morse1: "-..-",
+                            morse2: "-.--",
+                            morse3: "--..",
+                            colorMain: .colorPurple200,
+                            colorShadow: .colorPurpleShadow,
+                            bgImg: "Level6BG"
+                        )
+
+                    }
 
                 }
-
             }
-            .background(.colorOrange200)
 
         }
         .navigationBarBackButtonHidden(true)
