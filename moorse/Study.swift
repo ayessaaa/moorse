@@ -5,18 +5,18 @@
 //  Created by yessa on 4/4/26.
 //
 
-import SwiftUI
 import AudioToolbox
 import CoreHaptics
-
-
+import SwiftUI
 
 struct Study: View {
     @State private var isLoaded = false
     @State private var wasPlayed = false
     @State private var progress = 50.0
     @State private var contentSize: CGSize? = nil  // "proxy" size
-    
+
+    @State private var morseCodeIndex = -1
+
     var engine: CHHapticEngine?
 
     init() {
@@ -24,7 +24,9 @@ struct Study: View {
     }
 
     mutating func prepareHaptics() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+            return
+        }
         do {
             engine = try CHHapticEngine()
             try engine?.start()
@@ -32,30 +34,75 @@ struct Study: View {
             print("Haptic Engine Error: \(error.localizedDescription)")
         }
     }
-    
-    
-    
-    func playMorseCode(morseCode: String) {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-        
+
+    @MainActor func morseCodeAnimation(morseCode: String) async {
         let dotDuration = 0.2
         let dashDuration = 0.6
         let gap = 0.2
-        
+
+        var durationArray: [Double] = []
+
+        for char in morseCode {
+            switch char {
+            case ".":
+                durationArray.append(dotDuration)
+            case "-":
+                durationArray.append(dashDuration)
+            default:
+                break
+            }
+        }
+
+        for (index, code) in morseCode.enumerated() {
+            morseCodeIndex = index + 1
+            if code == "." {
+                do {
+                    try await Task.sleep(for: .seconds(dotDuration))
+                } catch {
+                    return
+                }
+            } else if code == "-" {
+                do {
+                    try await Task.sleep(for: .seconds(dashDuration))
+                } catch {
+                    return
+                }
+            }
+            morseCodeIndex = 0
+            do {
+                try await Task.sleep(for: .seconds(gap))
+            } catch {
+                return
+            }
+        }
+        morseCodeIndex = -1
+
+    }
+
+    func playMorseCode(morseCode: String) {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+            return
+        }
+
+        let dotDuration = 0.2
+        let dashDuration = 0.6
+        let gap = 0.2
+
         var events = [CHHapticEvent]()
         var currentTime: TimeInterval = 0
 
         // Helper to add events
         func addPulse(duration: TimeInterval) {
-            let event = CHHapticEvent(eventType: .hapticContinuous,
-                                      parameters: [],
-                                      relativeTime: currentTime,
-                                      duration: duration)
+            let event = CHHapticEvent(
+                eventType: .hapticContinuous,
+                parameters: [],
+                relativeTime: currentTime,
+                duration: duration
+            )
             events.append(event)
             currentTime += (duration + gap)
         }
 
-        
         for char in morseCode {
             switch char {
             case ".":
@@ -78,7 +125,7 @@ struct Study: View {
 
     var body: some View {
         VStack(spacing: 4) {
-//            TitleSection(showTitle: false)
+            //            TitleSection(showTitle: false)
 
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
@@ -196,9 +243,9 @@ struct Study: View {
                         .foregroundStyle(Color.colorBeige100.opacity(0.6))
 
                     DotLarge()
-                        .foregroundStyle(Color.colorBeige100)
+                        .foregroundStyle(morseCodeIndex == 1 ? Color.colorBeige100 : Color.colorBeige100.opacity(0.6))
                     LineLarge()
-                        .foregroundStyle(Color.colorBeige100.opacity(0.6))
+                        .foregroundStyle(morseCodeIndex == 2 ? Color.colorBeige100 : Color.colorBeige100.opacity(0.6))
                 }
 
                 .shadow(color: .colorOrangeShadow, radius: 0, x: 0, y: 6)
@@ -234,15 +281,21 @@ struct Study: View {
                     .fill(Color.white.opacity(0.15))
                     .frame(maxWidth: .infinity, maxHeight: 5)
 
-                HStack (spacing: 20){
+                HStack(spacing: 20) {
 
-                    Button(action: { playMorseCode(morseCode: ".-")
+                    Button(action: {
+                        playMorseCode(morseCode: ".-")
                         wasPlayed = true
+                        Task { await morseCodeAnimation(morseCode: ".-") }
                     }) {
-                        Image(systemName: wasPlayed ? "arrow.trianglehead.counterclockwise": "play.fill")
-                            .font(.system(size: 30, weight: .black))
-                            .frame(width: 120, height: 70)
-                            .foregroundStyle(.colorBeige100)
+                        Image(
+                            systemName: wasPlayed
+                                ? "arrow.trianglehead.counterclockwise"
+                                : "play.fill"
+                        )
+                        .font(.system(size: 30, weight: .black))
+                        .frame(width: 120, height: 70)
+                        .foregroundStyle(.colorBeige100)
 
                     }
                     .buttonStyle(
@@ -252,7 +305,7 @@ struct Study: View {
                             colorInnerShadow: .colorOrange200.opacity(0.25)
                         )
                     )
-                    
+
                     Button(action: {
                         AudioServicesPlaySystemSound(1520)
 
@@ -260,12 +313,12 @@ struct Study: View {
                         Image(systemName: "checkmark")
                             .font(.system(size: 36, weight: .heavy))
                             .frame(width: 120, height: 70)
-//                            .padding(.horizontal, 35)
-//                            .padding(.vertical, 15)
+                            //                            .padding(.horizontal, 35)
+                            //                            .padding(.vertical, 15)
                             .foregroundStyle(.colorOrange200)
 
                     }
-                    
+
                     .buttonStyle(
                         ButtonComponent(
                             colorMain: .colorBeige100,
@@ -276,16 +329,16 @@ struct Study: View {
                     .frame(width: 100, height: 100)
                 }
                 .opacity(isLoaded ? 1 : 0)
-                        .offset(y: isLoaded ? 0 : 20)
-                .onAppear(){
-                    
+                .offset(y: isLoaded ? 0 : 20)
+                .onAppear {
+
                     withAnimation(.easeIn(duration: 0.4)) {
                         isLoaded = true
                     }
                 }
                 .padding(.top, 50)
             }
-            
+
             .background(
                 Rectangle()
                     .fill(Color.colorOrange300)
