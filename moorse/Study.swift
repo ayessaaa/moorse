@@ -6,14 +6,79 @@
 //
 
 import SwiftUI
+import AudioToolbox
+import CoreHaptics
+
+
 
 struct Study: View {
+    @State private var isLoaded = false
+    @State private var wasPlayed = false
     @State private var progress = 50.0
     @State private var contentSize: CGSize? = nil  // "proxy" size
+    
+    var engine: CHHapticEngine?
+
+    init() {
+        prepareHaptics()
+    }
+
+    mutating func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("Haptic Engine Error: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    
+    func playMorseCode(morseCode: String) {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        
+        let dotDuration = 0.2
+        let dashDuration = 0.6
+        let gap = 0.2
+        
+        var events = [CHHapticEvent]()
+        var currentTime: TimeInterval = 0
+
+        // Helper to add events
+        func addPulse(duration: TimeInterval) {
+            let event = CHHapticEvent(eventType: .hapticContinuous,
+                                      parameters: [],
+                                      relativeTime: currentTime,
+                                      duration: duration)
+            events.append(event)
+            currentTime += (duration + gap)
+        }
+
+        
+        for char in morseCode {
+            switch char {
+            case ".":
+                addPulse(duration: dotDuration)
+            case "-":
+                addPulse(duration: dashDuration)
+            default:
+                break
+            }
+        }
+
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription)")
+        }
+    }
 
     var body: some View {
         VStack(spacing: 4) {
-            TitleSection(showTitle: false)
+//            TitleSection(showTitle: false)
 
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
@@ -171,10 +236,10 @@ struct Study: View {
 
                 HStack (spacing: 20){
 
-                    Button(action: {
-
+                    Button(action: { playMorseCode(morseCode: ".-")
+                        wasPlayed = true
                     }) {
-                        Image(systemName: "arrow.trianglehead.counterclockwise")
+                        Image(systemName: wasPlayed ? "arrow.trianglehead.counterclockwise": "play.fill")
                             .font(.system(size: 30, weight: .black))
                             .frame(width: 120, height: 70)
                             .foregroundStyle(.colorBeige100)
@@ -189,6 +254,7 @@ struct Study: View {
                     )
                     
                     Button(action: {
+                        AudioServicesPlaySystemSound(1520)
 
                     }) {
                         Image(systemName: "checkmark")
@@ -199,6 +265,7 @@ struct Study: View {
                             .foregroundStyle(.colorOrange200)
 
                     }
+                    
                     .buttonStyle(
                         ButtonComponent(
                             colorMain: .colorBeige100,
@@ -208,8 +275,17 @@ struct Study: View {
                     )
                     .frame(width: 100, height: 100)
                 }
+                .opacity(isLoaded ? 1 : 0)
+                        .offset(y: isLoaded ? 0 : 20)
+                .onAppear(){
+                    
+                    withAnimation(.easeIn(duration: 0.4)) {
+                        isLoaded = true
+                    }
+                }
                 .padding(.top, 50)
             }
+            
             .background(
                 Rectangle()
                     .fill(Color.colorOrange300)
@@ -235,3 +311,4 @@ struct Study: View {
 #Preview {
     Study()
 }
+
