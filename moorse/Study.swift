@@ -13,7 +13,7 @@ struct Study: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            TitleSection()
+            TitleSection(showTitle: false)
 
             ZStack(alignment: .bottom) {
                 VStack(spacing: 0) {
@@ -70,7 +70,7 @@ struct Study: View {
 
                 }
                 .padding()
-                .frame(width: .infinity, height: 75)
+                .frame(height: 75)
                 .background(.colorOrange200)
                 //            .shadow(radius: 0, x: 0, y: 3)
 
@@ -176,8 +176,7 @@ struct Study: View {
                     }) {
                         Image(systemName: "arrow.trianglehead.counterclockwise")
                             .font(.system(size: 30, weight: .black))
-                            .padding(.horizontal, 35)
-                            .padding(.vertical, 15)
+                            .frame(width: 120, height: 70)
                             .foregroundStyle(.colorBeige100)
 
                     }
@@ -194,8 +193,9 @@ struct Study: View {
                     }) {
                         Image(systemName: "checkmark")
                             .font(.system(size: 36, weight: .heavy))
-                            .padding(.horizontal, 35)
-                            .padding(.vertical, 15)
+                            .frame(width: 120, height: 70)
+//                            .padding(.horizontal, 35)
+//                            .padding(.vertical, 15)
                             .foregroundStyle(.colorOrange200)
 
                     }
@@ -206,6 +206,7 @@ struct Study: View {
                             colorInnerShadow: .colorOrange200.opacity(0.25)
                         )
                     )
+                    .frame(width: 100, height: 100)
                 }
                 .padding(.top, 50)
             }

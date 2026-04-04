@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct TitleSection: View {
+    var showTitle: Bool = true
     var body: some View {
+
         HStack {
-            Text("Moorse")
-                .foregroundStyle(Color.colorMaroon300)
+            if showTitle {
+
+                Text("Moorse")
+                    .foregroundStyle(Color.colorMaroon300)
+                    .padding(5)
+            }
         }
-        .padding(10)
+        .padding(5)
         .frame(maxWidth: .infinity)
         .background(
             ZStack(alignment: .bottom) {
@@ -39,9 +45,9 @@ struct TitleSection: View {
         .background(Color.colorBeige100)
         .font(Font.custom("LondrinaSolid-Regular", size: 36))
     }
-    
+
 }
 
 #Preview {
-    TitleSection()
+    TitleSection(showTitle: false)
 }

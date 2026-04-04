@@ -92,9 +92,7 @@ struct TopBarLevel: View {
 
                     HStack(spacing: 5) {
                         Spacer()
-                        Button(action: {
-
-                        }) {
+                        NavigationLink(destination: Study()) {
                             HStack {
                                 Text("Study")
                                     .font(
@@ -113,9 +111,6 @@ struct TopBarLevel: View {
                             }
                             .padding(.horizontal, 15)
                             .padding(.vertical, 5)
-                            .contentShape(
-                                RoundedRectangle(cornerRadius: 12)
-                            )
                             .shadow(radius: 0, x: 0, y: 5)
                         }
                         .frame(minWidth: 100)
@@ -129,8 +124,7 @@ struct TopBarLevel: View {
                                 )
                             )
                         )
-                        .compositingGroup()
-                        .allowsHitTesting(true)
+                        
 
                         Button(action: {
 
