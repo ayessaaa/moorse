@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProgressBar: View {
-    @State private var progress: Double = 0.5
+    @State private var progress: Double = 0.0
     let color: Color
     let foregroundColor: Color
     let shadowColor: Color
@@ -52,6 +52,7 @@ struct ProgressBar: View {
             Text(String(Int(progress*100))+"%")
                 .shadow(color: shadowColor, radius: 0, x: 0, y: 3)
         }
+        
         
         .font(Font.custom("LondrinaSolid-Regular", size: 20))
         .foregroundColor(foregroundColor)
