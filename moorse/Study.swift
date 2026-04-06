@@ -94,7 +94,7 @@ struct Study: View {
                     )
             )
             
-            QuestionMultipleChoice(colorMain: .colorOrange200, colorMain300: .colorOrange300, colorShadow: .colorOrangeShadow, letter: "E",
+            Identification(colorMain: .colorOrange200, colorMain300: .colorOrange300, colorShadow: .colorOrangeShadow, letter: "E",
                         morseCode: ".")
 
             
