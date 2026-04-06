@@ -49,50 +49,6 @@ struct Identification: View {
         }
     }
 
-    @MainActor func morseCodeAnimation(morseCode: String) async {
-        let dotDuration = 0.2
-        let dashDuration = 0.6
-        let gap = 0.2
-
-        var durationArray: [Double] = []
-
-        for char in morseCode {
-            switch char {
-            case ".":
-                durationArray.append(dotDuration)
-            case "-":
-                durationArray.append(dashDuration)
-            default:
-                break
-            }
-        }
-
-        for (index, code) in morseCode.enumerated() {
-            morseCodeIndex = index + 1
-            if code == "." {
-                do {
-                    try await Task.sleep(for: .seconds(dotDuration))
-                } catch {
-                    return
-                }
-            } else if code == "-" {
-                do {
-                    try await Task.sleep(for: .seconds(dashDuration))
-                } catch {
-                    return
-                }
-            }
-            morseCodeIndex = 0
-            do {
-                try await Task.sleep(for: .seconds(gap))
-            } catch {
-                return
-            }
-        }
-        morseCodeIndex = -1
-
-    }
-
     func playMorseCode(morseCode: String) {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
             return
@@ -257,66 +213,94 @@ struct Identification: View {
                 .fill(Color.white.opacity(0.15))
                 .frame(maxWidth: .infinity, maxHeight: 5)
 
-            HStack(spacing: 10) {
+            VStack(spacing: 20) {
+                HStack(spacing: 10) {
 
-                Button(action: {
-                    answerArray.append(".")
-                }) {
-                    DotLarge()
-                        .foregroundStyle(
-                            Color.colorBeige100
+                    Button(action: {
+                        answerArray.append(".")
+                        playMorseCode(morseCode: ".")
+                    }) {
+                        DotLarge()
+                            .foregroundStyle(
+                                Color.colorBeige100
+                            )
+                            .frame(minWidth: 120)
+                            .frame(minHeight: 70)
+
+                    }
+                    .buttonStyle(
+                        ButtonComponent(
+                            colorMain: colorMain300,
+                            colorShadow: colorShadow,
+                            colorInnerShadow: colorMain.opacity(0.25)
                         )
-                        .frame(minWidth: 120)
-                        .frame(minHeight: 70)
-
-                }
-                .buttonStyle(
-                    ButtonComponent(
-                        colorMain: colorMain300,
-                        colorShadow: colorShadow,
-                        colorInnerShadow: colorMain.opacity(0.25)
                     )
-                )
 
-                Button(action: {
-                    answerArray.append("-")
-                }) {
-                    LineLarge()
-                        .foregroundStyle(
-                            Color.colorBeige100
+                    Button(action: {
+                        answerArray.append("-")
+                        playMorseCode(morseCode: "-")
+                    }) {
+                        LineLarge()
+                            .foregroundStyle(
+                                Color.colorBeige100
+                            )
+
+                            .frame(minWidth: 120)
+                            .frame(minHeight: 70)
+
+                    }
+                    .buttonStyle(
+                        ButtonComponent(
+                            colorMain: colorMain300,
+                            colorShadow: colorShadow,
+                            colorInnerShadow: colorMain.opacity(0.25)
                         )
-
-                        .frame(minWidth: 120)
-                        .frame(minHeight: 70)
+                    )
 
                 }
-                .buttonStyle(
-                    ButtonComponent(
-                        colorMain: colorMain300,
-                        colorShadow: colorShadow,
-                        colorInnerShadow: colorMain.opacity(0.25)
+                HStack(spacing: 10) {
+
+                    Button(action: {
+                        answerArray.popLast()
+                    }) {
+                        Image(systemName: "delete.left.fill")
+                            .font(.system(size: 36, weight: .black))
+                            .frame(minWidth: 80, minHeight: 70)
+                            //                            .padding(.horizontal, 35)
+                            //                            .padding(.vertical, 15)
+                            .foregroundStyle(colorMain)
+
+                    }
+
+                    .buttonStyle(
+                        ButtonComponent(
+                            colorMain: .colorBeige100,
+                            colorShadow: colorShadow,
+                            colorInnerShadow: colorMain.opacity(0.25)
+                        )
                     )
-                )
 
-                Button(action: {
-                    answerArray.append("_")
-                }) {
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 36, weight: .heavy))
-                        .frame(minWidth: 80, minHeight: 70)
-                        //                            .padding(.horizontal, 35)
-                        //                            .padding(.vertical, 15)
-                        .foregroundStyle(colorMain)
+                    Button(action: {
 
+                    }) {
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 36, weight: .black))
+                            .frame(minWidth: 80, minHeight: 70)
+                            //                            .padding(.horizontal, 35)
+                            //                            .padding(.vertical, 15)
+                            .foregroundStyle(colorMain)
+
+                    }
+
+                    .buttonStyle(
+                        ButtonComponent(
+                            colorMain: .colorBeige100,
+                            colorShadow: colorShadow,
+                            colorInnerShadow: colorMain.opacity(0.25)
+                        )
+                    )
                 }
 
-                .buttonStyle(
-                    ButtonComponent(
-                        colorMain: .colorBeige100,
-                        colorShadow: colorShadow,
-                        colorInnerShadow: colorMain.opacity(0.25)
-                    )
-                )
             }
             .opacity(isLoaded ? 1 : 0)
             .offset(y: isLoaded ? 0 : 20)
@@ -352,4 +336,3 @@ struct Identification: View {
         morseCode: ".."
     )
 }
-
