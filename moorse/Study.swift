@@ -10,11 +10,10 @@ import CoreHaptics
 import SwiftUI
 
 struct Study: View {
-    
+
     @State private var progress = 50.0
     @State private var contentSize: CGSize? = nil  // "proxy" size
 
-    
     var body: some View {
         VStack(spacing: 4) {
             //            TitleSection(showTitle: false)
@@ -93,11 +92,16 @@ struct Study: View {
                         y: 5
                     )
             )
-            
-            Identification(colorMain: .colorOrange200, colorMain300: .colorOrange300, colorShadow: .colorOrangeShadow, letter: "E",
-                        morseCode: ".")
 
-            
+            AudioIdentification(
+                colorMain: .colorOrange200,
+                colorMain300: .colorOrange300,
+                colorShadow: .colorOrangeShadow,
+                letter: "E",
+                morseCode: ".", 
+                choices: ["A", "E", "I", "N", "T"]
+            )
+
         }
 
         .background(
@@ -112,4 +116,3 @@ struct Study: View {
 #Preview {
     Study()
 }
-
